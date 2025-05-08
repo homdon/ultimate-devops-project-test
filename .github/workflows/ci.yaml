@@ -42,12 +42,15 @@ jobs:
           uses: actions/setup-go@v2
           with:
            go-version: 1.22
+        - name: Install Go dependencies**
+          run: |
+             cd src/product-catalog
+             go mod tidy   
         
         - name: Run golangci-lint
           uses: golangci/golangci-lint-action@v6
           with:
             version: v1.55.2
-            run: golangci-lint run
             working-directory: src/product-catalog
 
     docker:
@@ -99,7 +102,7 @@ jobs:
             git add kubernetes/productcatalog/deploy.yaml
             git commit -m "[CI]: Update product catalog image tag"
             git push origin HEAD:main -f
-
+#
         
         
           
